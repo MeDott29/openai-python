@@ -3,27 +3,25 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional
-from typing_extensions import Literal
 
 import httpx
+from typing_extensions import Literal
 
-from .files import Files, AsyncFiles, FilesWithRawResponse, AsyncFilesWithRawResponse
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import maybe_transform
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import to_raw_response_wrapper, async_to_raw_response_wrapper
-from ....pagination import SyncCursorPage, AsyncCursorPage
-from ....types.beta import (
-    Assistant,
-    AssistantDeleted,
-    assistant_list_params,
-    assistant_create_params,
-    assistant_update_params,
-)
 from ...._base_client import AsyncPaginator, make_request_options
+from ...._resource import AsyncAPIResource, SyncAPIResource
+from ...._response import (async_to_raw_response_wrapper,
+                           to_raw_response_wrapper)
+from ...._types import NOT_GIVEN, Body, Headers, NotGiven, Query
+from ...._utils import maybe_transform
+from ....pagination import AsyncCursorPage, SyncCursorPage
+from ....types.beta import (Assistant, AssistantDeleted,
+                            assistant_create_params, assistant_list_params,
+                            assistant_update_params)
+from .files import (AsyncFiles, AsyncFilesWithRawResponse, Files,
+                    FilesWithRawResponse)
 
 if TYPE_CHECKING:
-    from ...._client import OpenAI, AsyncOpenAI
+    from ...._client import AsyncOpenAI, OpenAI
 
 __all__ = ["Assistants", "AsyncAssistants"]
 
