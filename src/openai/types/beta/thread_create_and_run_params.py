@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
+from typing import List, Optional, Union
+
 from typing_extensions import Literal, Required, TypedDict
 
 from ...types import shared_params
@@ -61,7 +62,6 @@ class ThreadCreateAndRunParams(TypedDict, total=False):
 class ThreadMessage(TypedDict, total=False):
     content: Required[str]
     """The content of the message."""
-
     role: Required[Literal["user"]]
     """The role of the entity that is creating the message.
 
