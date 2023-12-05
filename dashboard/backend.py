@@ -9,13 +9,13 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 
 @app.route('/api/request', methods=['POST'])
 def send_request():
-    data = request.get_json()
+    content = request.form['content']
     response = openai.ChatCompletion.create(
         model="gpt-3",
         messages=[
             {
                 "role": "user",
-                "content": data['content'],
+                "content": content,
             },
         ],
     )
