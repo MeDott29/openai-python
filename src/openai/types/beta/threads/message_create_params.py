@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 from typing import List, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal
+from src.dashboard import Dashboard, Required, TypedDict
 
 __all__ = ["MessageCreateParams"]
 
