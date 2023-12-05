@@ -3,27 +3,25 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, List, Optional
-from typing_extensions import Literal
 
 import httpx
+from typing_extensions import Literal
 
-from .files import Files, AsyncFiles, FilesWithRawResponse, AsyncFilesWithRawResponse
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import maybe_transform
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import to_raw_response_wrapper, async_to_raw_response_wrapper
-from ....pagination import SyncCursorPage, AsyncCursorPage
-from ....types.beta import (
-    Assistant,
-    AssistantDeleted,
-    assistant_list_params,
-    assistant_create_params,
-    assistant_update_params,
-)
 from ...._base_client import AsyncPaginator, make_request_options
+from ...._resource import AsyncAPIResource, SyncAPIResource
+from ...._response import (async_to_raw_response_wrapper,
+                           to_raw_response_wrapper)
+from ...._types import NOT_GIVEN, Body, Headers, NotGiven, Query
+from ...._utils import maybe_transform
+from ....pagination import AsyncCursorPage, SyncCursorPage
+from ....types.beta import (Assistant, AssistantDeleted,
+                            assistant_create_params, assistant_list_params,
+                            assistant_update_params)
+from .files import (AsyncFiles, AsyncFilesWithRawResponse, Files,
+                    FilesWithRawResponse)
 
 if TYPE_CHECKING:
-    from ...._client import OpenAI, AsyncOpenAI
+    from ...._client import AsyncOpenAI, OpenAI
 
 __all__ = ["Assistants", "AsyncAssistants"]
 
@@ -38,6 +36,72 @@ class Assistants(SyncAPIResource):
         self.with_raw_response = AssistantsWithRawResponse(self)
 
     def create(
+    def attach_file(
+        self,
+        assistant_id: str,
+        file_id: str,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AssistantFile:
+        """
+        Attach a file to the assistant.
+
+        Args:
+          assistant_id: The ID of the assistant.
+          file_id: The ID of the file to attach to the assistant.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self.files.create(
+            assistant_id=assistant_id,
+            file_id=file_id,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
+    def attach_file(
+        self,
+        assistant_id: str,
+        file_id: str,
+        *,
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AssistantFile:
+        """
+        Attach a file to the assistant.
+
+        Args:
+          assistant_id: The ID of the assistant.
+          file_id: The ID of the file to attach to the assistant.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self.files.create(
+            assistant_id=assistant_id,
+            file_id=file_id,
+            extra_headers=extra_headers,
+            extra_query=extra_query,
+            extra_body=extra_body,
+            timeout=timeout,
+        )
         self,
         *,
         model: str,
