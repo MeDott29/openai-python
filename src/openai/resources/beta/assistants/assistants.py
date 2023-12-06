@@ -1,3 +1,4 @@
+from .dashboard import Dashboard
 # File generated from our OpenAPI spec by Stainless.
 
 from __future__ import annotations
@@ -92,6 +93,9 @@ class Assistants(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         extra_headers = {"OpenAI-Beta": "assistants=v1", **(extra_headers or {})}
+        # Dashboard update after creating the assistant
+        Dashboard.update_after_create()
+
         return self._post(
             "/assistants",
             body=maybe_transform(
@@ -312,6 +316,9 @@ class Assistants(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         extra_headers = {"OpenAI-Beta": "assistants=v1", **(extra_headers or {})}
+        # Dashboard update after deleting the assistant
+        Dashboard.update_after_delete(assistant_id)
+
         return self._delete(
             f"/assistants/{assistant_id}",
             options=make_request_options(
@@ -385,6 +392,9 @@ class AsyncAssistants(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         extra_headers = {"OpenAI-Beta": "assistants=v1", **(extra_headers or {})}
+        # Dashboard update after creating the assistant
+        await Dashboard.update_after_create_async()
+
         return await self._post(
             "/assistants",
             body=maybe_transform(
@@ -605,6 +615,9 @@ class AsyncAssistants(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         extra_headers = {"OpenAI-Beta": "assistants=v1", **(extra_headers or {})}
+        # Dashboard update after deleting the assistant
+        await Dashboard.update_after_delete_async(assistant_id)
+
         return await self._delete(
             f"/assistants/{assistant_id}",
             options=make_request_options(
